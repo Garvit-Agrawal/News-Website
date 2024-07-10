@@ -149,3 +149,15 @@ main {
 .news-source {
     margin-block: 12px;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .nav-links {
+      display: none;
+    }
+    .card{
+        width: 100%;
+    }
+  }
+  
+  

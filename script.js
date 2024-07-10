@@ -1,22 +1,19 @@
-const API_KEY = "1d3a0eefa97b499d8fbc4ee93eeb40b7";
+const API_KEY = "1908290d9661413687765222a106657f";
 const url = "https://newsapi.org/v2/everything?q=";
 
 window.addEventListener("load", () => fetchNews("India"));
 
-function reload() {
-    window.location.reload();
-}
 
 async function fetchNews(query) {
-    const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
-    const data = await res.json();
-    bindData(data.articles);
+    const response = await fetch(`${url}${query}&apiKey=${API_KEY}`);
+    const requiredData = await response.json();
+    bindData(requiredData.articles);
 }
 
 function bindData(articles) {
     const cardsContainer = document.getElementById("cards-container");
     const newsCardTemplate = document.getElementById("template-news-card");
-
+    
     cardsContainer.innerHTML = "";
 
     articles.forEach((article) => {
@@ -36,7 +33,7 @@ function fillDataInCard(cardClone, article) {
     newsImg.src = article.urlToImage;
     newsTitle.innerHTML = article.title;
     newsDesc.innerHTML = article.description;
-
+    
     const date = new Date(article.publishedAt).toLocaleString("en-US", {
         timeZone: "Asia/Jakarta",
     });
@@ -67,3 +64,7 @@ searchButton.addEventListener("click", () => {
     curSelectedNav?.classList.remove("active");
     curSelectedNav = null;
 });
+
+function reload() {
+    window.location.reload();
+}
